@@ -13,7 +13,12 @@ PHP wrapper for the cloudatcost's API by HSR TECH
 [Could at Cost API](https://github.com/cloudatcost/api)
 
 [VPS-HOSTING.CA API](https://panel.vps-hosting.ca/api-details.php)
+## Install
+Via [Composer](https://getcomposer.org/)
 
+```bash
+$ composer require hsrtech/catc
+```
 # Usage
 
 ### Basic Usage
