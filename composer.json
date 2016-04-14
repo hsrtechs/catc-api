@@ -1,5 +1,5 @@
 {
-    "name": "hsrtech/catc-api",
+    "name": "hsrtech/catc",
     "description": "PHP Wrapper for Cloudatcost and vps-hosting.ca.",
     "version" : "1.0",
     "minimum-stability": "1.0",
