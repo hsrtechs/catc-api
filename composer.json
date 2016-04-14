@@ -2,6 +2,7 @@
     "name": "hsrtech/catc-api",
     "description": "PHP Wrapper for Cloudatcost and vps-hosting.ca.",
     "version" : "1.0",
+    "minimum-stability": "1.0",
     "type": "library",
     "keywords": ["Cloud at Cost", "API", "Cloudatcost"],
     "require": {
@@ -23,6 +24,5 @@
             "hsrtech\\catc\\" : "src/"
         }
     }
-    "minimum-stability": "1.0"
 
 }
