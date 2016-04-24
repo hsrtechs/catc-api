@@ -6,9 +6,16 @@ use \hsrtech\catc;
 use \Illuminate\Foundation\AliasLoader;
 use \Illuminate\Support\ServiceProvider;
 
+/**
+ * Class CatCServiceProvider
+ * @package hsrtech\catc
+ */
 class CatCServiceProvider extends ServiceProvider
 {
 
+    /**
+     * Registering the Alias for the wrapper
+     */
     public function boot(){
         $loader = AliasLoader::getInstance();
         $loader->alias('catc','hsrtech\catc\wrapper');
