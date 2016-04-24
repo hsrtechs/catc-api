@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace hsrtech\catc;
 
 use \hsrtech\catc;
 use \Illuminate\Foundation\AliasLoader;
