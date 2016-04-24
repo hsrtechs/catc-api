@@ -7,14 +7,10 @@ class Wrapper extends Curl
     /**
      * @var mixed|string
      */
-    private $_params,
-            $_base_link,
-            $_result;
-
-    /**
-     * @var mixed|string
-     */
-    private $_api_version = 'v1';
+    private $_params = [],
+            $_base_link = "https://panel.cloudatcost.com/api",
+            $_result = NULL,
+            $_api_version = 'v1';
 
     /**
      * @array List of the commands
@@ -37,12 +33,8 @@ class Wrapper extends Curl
      * Wrapper constructor.
      * @param array $api_params
      * @param array $extra_params
-     * @throws \ErrorException
-     * @throws \Exception
-     * @internal param array $params
      */
-
-    public function __construct(array $api_params, array $extra_params)
+    public function __construct(array $api_params, array $extra_params = [])
     {
         parent::__construct();
         if(empty($api_params['email']) || empty($api_params['api_key']))
@@ -51,15 +43,14 @@ class Wrapper extends Curl
         }
 
         $this->_params = $api_params;
-        $this->_base_link = (!isset($extra_params['link']) || is_null($extra_params['link'])) ? "https://panel.cloudatcost.com/api": $extra_params['link'];
-        $this->_api_version = (!isset($extra_params['api_version']) || is_null($extra_params['api_version'])) ? "v1": $extra_params['api_version'];
+        $this->_base_link = (!isset($extra_params['link']) || is_null($extra_params['link'])) ? $this->_base_link: $extra_params['link'];
+        $this->_api_version = (!isset($extra_params['api_version']) || is_null($extra_params['api_version'])) ? $this->_api_version: $extra_params['api_version'];
         return true;
     }
 
     /**
-     * Reterive the list of the Servers
+     * Retrieve the list of the Servers from the external website
      * @return mixed|string
-     * @throws \Exception
      */
     public function getServers()
     {
@@ -68,7 +59,8 @@ class Wrapper extends Curl
     }
 
     /**
-     * @throws \Exception
+     * Get the List of templates
+     * @return mixed|string
      */
     public function getTemplates(){
         $this->request(self::ACTIONS['templates'],'GET');
@@ -76,8 +68,8 @@ class Wrapper extends Curl
     }
 
     /**
+     * Get the list of Tasks Performed
      * @return mixed|string
-     * @throws \Exception
      */
     public function getTasks()
     {
@@ -125,7 +117,7 @@ class Wrapper extends Curl
      * @return mixed|string
      * @throws \Exception
      */
-    protected function powerop($Server_ID,$action)
+    private function powerop($Server_ID,$action)
     {
         $this->_params['sid'] = $Server_ID;
         $this->_params['action'] = $action;
