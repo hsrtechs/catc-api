@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use hsrtech\catc;
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\ServiceProvider;
+use \hsrtech\catc;
+use \Illuminate\Foundation\AliasLoader;
+use \Illuminate\Support\ServiceProvider;
 
 class CatCServiceProvider extends ServiceProvider
 {
