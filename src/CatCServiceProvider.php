@@ -2,8 +2,6 @@
 
 namespace hsrtech\catc;
 
-use \hsrtech\catc;
-use \Illuminate\Foundation\AliasLoader;
 use \Illuminate\Support\ServiceProvider;
 
 /**
@@ -17,8 +15,7 @@ class CatCServiceProvider extends ServiceProvider
      * Registering the Alias for the wrapper
      */
     public function boot(){
-        $loader = AliasLoader::getInstance();
-        $loader->alias('catc','hsrtech\catc\wrapper');
+
     }
     /**
      * Registering the Cloud at cost API
@@ -27,8 +24,13 @@ class CatCServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('catc', function (){
-            return new catc\Wrapper([env('API_KEY'),env('API_EMAIL')]);
+        $this->app->singleton(Wrapper::class, function (){
+            $parms = [
+                'api_key' => env('API_KEY'),
+                'email' => env('API_EMAIL'),
+            ];
+            return (new Wrapper($parms));
         });
+
     }
 }

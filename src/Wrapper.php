@@ -2,6 +2,10 @@
 
 use \Curl\Curl;
 
+/**
+ * Class Wrapper
+ * @package hsrtech\catc
+ */
 class Wrapper extends Curl
 {
     /**
@@ -32,20 +36,36 @@ class Wrapper extends Curl
     /**
      * Wrapper constructor.
      * @param array $api_params
-     * @param array $extra_params
+     * @throws \ErrorException
+     * @throws \Exception
+     * @internal param array $extra_params
      */
-    public function __construct(array $api_params, array $extra_params = [])
+    public function __construct(array $api_params = [])
     {
         parent::__construct();
         if(empty($api_params['email']) || empty($api_params['api_key']))
         {
-            return('User Email and API key is Required');
+            throw new \Exception('User Email and API key is Required');
         }
 
         $this->_params = $api_params;
-        $this->_base_link = (!isset($extra_params['link']) || is_null($extra_params['link'])) ? $this->_base_link: $extra_params['link'];
-        $this->_api_version = (!isset($extra_params['api_version']) || is_null($extra_params['api_version'])) ? $this->_api_version: $extra_params['api_version'];
         return true;
+    }
+
+    /**
+     * Set the link to the api if the link is different then CloutAtCost
+     * @param $link
+     */
+    public function setLink($link){
+        $this->_base_link = (!isset($link)) ? $this->_base_link: $link;
+    }
+
+    /**
+     * Set the API version if the version is other then v1
+     * @param $API_VERSION
+     */
+    public function selAPIVersion($API_VERSION){
+        $this->_api_version = (!isset($API_VERSION)) ? $this->_api_version : $API_VERSION;
     }
 
     /**
@@ -235,6 +255,20 @@ class Wrapper extends Curl
     public function result()
     {
         return $this->_result;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail(){
+        return $this->_params['email'];
+    }
+
+    /**
+     * @return the api key
+     */
+    public function getkey(){
+        return $this->_params;
     }
 
     /**
