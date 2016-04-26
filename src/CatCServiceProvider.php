@@ -27,7 +27,7 @@ class CatCServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('api', function (){
+        $this->app->singleton('catc', function (){
             return new catc\Wrapper([env('API_KEY'),env('API_EMAIL')]);
         });
     }
