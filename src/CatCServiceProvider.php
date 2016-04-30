@@ -2,7 +2,8 @@
 
 namespace hsrtech\catc;
 
-use \Illuminate\Support\ServiceProvider;
+use Validator;
+use Illuminate\Support\ServiceProvider;
 
 /**
  * Class CatCServiceProvider
@@ -12,13 +13,25 @@ class CatCServiceProvider extends ServiceProvider
 {
 
     /**
-     * Registering the Alias for the wrapper
+     * Regestiring Validations
      */
-    public function boot(){
+    public function boot()
+    {
 
+        Validator::extend('ram', function($attribute, $value, $parameters, $validator) {
+            return (is_numeric($value) && is_integer(intval($value/512)));
+        });
+
+        Validator::extend('cpu', function($attribute, $value, $parameters, $validator) {
+            return (is_numeric($value) && is_integer(intval($value)));
+        });
+
+        Validator::extend('storage', function($attribute, $value, $parameters, $validator) {
+            return (is_numeric($value) && is_integer(intval($value/10)));
+        });
     }
     /**
-     * Registering the Cloud at cost API
+     * Registering the Cloud at cost API Constructor
      *
      * @return void
      */
